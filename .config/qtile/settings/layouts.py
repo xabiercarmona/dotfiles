@@ -1,11 +1,12 @@
 from libqtile import layout
+from settings.theme import colors
 
 # Set allowed layouts, and add a toggle key
 
 #Configuration for layout window
 layout_conf = {
-#    'border_focus': colors['focus'][0],
-    'border_width': 1,
+    'border_focus': colors['focus'][0],
+    'border_width': 2,
     'margin': 4
 }
 
@@ -14,11 +15,11 @@ layouts = [
     #All windows max size
     layout.Max(),
     #Master and slave stack
-    layout.MonadTall(),
+    layout.MonadTall(**layout_conf),
     #All windows almost equal distribution
-    layout.RatioTile(),
+    layout.Bsp(**layout_conf),
     #All windows max with task
-    layout.TreeTab(),
+    layout.TreeTab(**layout_conf),
 ]
 
 floating_layout = layout.Floating(

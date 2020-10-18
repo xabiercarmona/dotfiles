@@ -44,7 +44,7 @@ keys = [
 
     #Apps
       Key([mod], intro, lazy.spawn("alacritty"), desc="Open terminal"),
-      Key([mod], "r", lazy.spawn("google-chrome"), desc="Open browser"),
+      Key([mod], "t", lazy.spawn("google-chrome"), desc="Open browser"),
       Key([mod], "e", lazy.spawn("thunar"), desc="Open file explorer"),
       Key([mod], "s", lazy.spawn("scrot"), desc="Screenshot"),
 
@@ -67,5 +67,5 @@ for i, group in enumerate(groups):
         # Switch to workspace N
         Key([mod], groupNumber, lazy.group[group.name].toscreen()),
         # Send window to workspace N
-        Key([mod, "shift"], groupNumber, lazy.window.togroup(group.name))
+        Key([mod, control], groupNumber, lazy.window.togroup(group.name))
     ])

@@ -17,18 +17,45 @@ powerline = lambda fg="light", bg="dark": widget.TextBox(
     padding=-2
 )
 
-icon = lambda fg='text', bg='dark', fontsize=16, text="?", padding=3: widget.TextBox(
+icon = lambda fg='text', bg='dark', fontsize=14, text="?", padding=2: widget.TextBox(
     **base(fg, bg),
     fontsize=fontsize,
     text=text,
     padding=padding
 )
 
-primary_widgets = [
+workspaces = lambda: [
+    separator(),
+    widget.GroupBox(
+        **base(fg='light'),
+        font='UbuntuMono Nerd Font',
+        fontsize=17,
+        margin_y=3,
+        margin_x=0,
+        padding_y=8,
+        padding_x=5,
+        borderwidth=1,
+        active=colors['active'],
+        inactive=colors['inactive'],
+        rounded=False,
+        highlight_method='block',
+        urgent_alert_method='block',
+        urgent_border=colors['urgent'],
+        this_current_screen_border=colors['focus'],
+        this_screen_border=colors['grey'],
+        other_current_screen_border=colors['dark'],
+        other_screen_border=colors['dark'],
+        disable_drag=True
+    ),
+    separator(),
+    widget.WindowName(**base(fg='focus'), fontsize=14, padding=5),
+    separator(),
+]
 
-    widget.GroupBox(),
+primary_widgets = [
+    *workspaces(),
     widget.Prompt(),
-    widget.WindowName(),
+    #widget.WindowName(),
     widget.Chord(
         chords_colors={
             'launch': ("#ff0000", "#ffffff"),
@@ -47,27 +74,25 @@ primary_widgets = [
     #Net/Cpu/RAM usage
     powerline('color3', 'color4'),
     #Net usage widget
-    #icon(bg="color3", text=' '),  # Icon: nf-fa-feed
-    icon(bg="color3", text='',fontsize=10, padding=0),  # Icon: nf-fa-long_arrow_up
-    icon(bg="color3", text=' ',fontsize=10, padding=0),  # Icon: nf-fa-long_arrow_down
-    widget.Net(**base(bg='color3'), interface="enp0s3"),
+    icon(bg="color3", text=' '),  # Icon: nf-fa-feed
+    widget.Net(**base(bg='color3'), format="{up} ↑↓{down}"),
     #Cpu usage widget
-    icon(bg="color3", text=' 龍'),  # Icon: nf-mdi-speedometer
-    widget.CPU(**base(bg='color3')),
+    icon(bg="color3", text=' '),  # Icon: nf-mdi-speedometer
+    widget.CPU(**base(bg='color3'), format="{load_percent}%"),
     #RAM usage widget
-    icon(bg="color3", text=' '),  # Icon: nf-mdi-memory
+    icon(bg="color3", text='溜'),  # Icon: nf-mdi-memory
     widget.Memory(**base(bg='color3')),
 
     #Layout
     powerline('color2', 'color3'),
     #Layout widget
-    widget.CurrentLayoutIcon(**base(bg='color2'), scale=0.65),
+    widget.CurrentLayoutIcon(**base(bg='color2'), scale=0.55),
     widget.CurrentLayout(**base(bg='color2')),
 
     #Clock
     powerline('color1', 'color2'),
     #Clock widget
-    icon(bg="color1", fontsize=17, text=' '), # Icon: nf-mdi-calendar_clock
+    icon(bg="color1", text=' '), # Icon: nf-mdi-calendar_clock
     widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M:%S '),
 ]
 
