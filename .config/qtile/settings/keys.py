@@ -12,6 +12,8 @@ shift = "shift"
 tab = "Tab"
 intro = "Return"
 
+terminal = "alacritty"
+
 #Define shortcuts
 keys = [
     #Qtile
@@ -43,7 +45,7 @@ keys = [
       Key([mod, shift], "r", lazy.spawn("rofi -show"), desc="Show window switcher"),
 
     #Apps
-      Key([mod], intro, lazy.spawn("alacritty"), desc="Open terminal"),
+      Key([mod], intro, lazy.spawn(terminal), desc="Open terminal"),
       Key([mod], "t", lazy.spawn("google-chrome"), desc="Open browser"),
       Key([mod], "e", lazy.spawn("thunar"), desc="Open file explorer"),
       Key([mod], "s", lazy.spawn("scrot"), desc="Screenshot"),

@@ -8,7 +8,8 @@ from settings.path import qtile_path
 
 filename = "selected_theme.json"
 themes_folder = "themes"
-default_theme = "dracula"
+default_theme = "default"
+
 
 def load_theme():
     theme = default_theme

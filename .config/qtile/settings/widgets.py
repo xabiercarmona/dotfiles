@@ -2,6 +2,7 @@
 
 from libqtile import widget
 from settings.theme import colors
+from settings.keys import terminal
 
 base = lambda fg='text', bg='dark': {
     'foreground': colors[fg],
@@ -29,7 +30,7 @@ workspaces = lambda: [
     widget.GroupBox(
         **base(fg='light'),
         font='UbuntuMono Nerd Font',
-        fontsize=17,
+        fontsize=16,
         margin_y=3,
         margin_x=0,
         padding_y=8,
@@ -37,7 +38,6 @@ workspaces = lambda: [
         borderwidth=1,
         active=colors['active'],
         inactive=colors['inactive'],
-        rounded=False,
         highlight_method='block',
         urgent_alert_method='block',
         urgent_border=colors['urgent'],
@@ -54,34 +54,34 @@ workspaces = lambda: [
 
 primary_widgets = [
     *workspaces(),
-    widget.Prompt(),
-    #widget.WindowName(),
-    widget.Chord(
-        chords_colors={
-            'launch': ("#ff0000", "#ffffff"),
-        },
-        name_transform=lambda name: name.upper(),
-    ),
-
-    #Systray
-    widget.Systray(),
+    separator(),
 
     #Packman icon
-    powerline('color4', 'dark'),
-    icon(bg="color4", text=' '), # Icon: nf-fa-download
-    widget.Pacman(**base(bg='color4'), update_interval=1800),
+    powerline('color5', 'dark'),
+    icon(bg="color5", text=' '), # Icon: nf-fa-download
+    widget.Pacman(**base(bg='color5'),
+        mouse_callbacks = {'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+        update_interval=1800),
 
-    #Net/Cpu/RAM usage
-    powerline('color3', 'color4'),
+    #Net usage
+    powerline('color4', 'color5'),
     #Net usage widget
-    icon(bg="color3", text=' '),  # Icon: nf-fa-feed
-    widget.Net(**base(bg='color3'), format="{up} ↑↓{down}"),
+    icon(bg="color4", text=' '),  # Icon: nf-fa-feed
+    widget.Net(**base(bg='color4'),
+        mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn('nm-connection-editor')},
+        format="{up} ↑↓{down}"),
+
+    #Cput/RAM usage
+    powerline('color3', 'color4'),
     #Cpu usage widget
     icon(bg="color3", text=' '),  # Icon: nf-mdi-speedometer
-    widget.CPU(**base(bg='color3'), format="{load_percent}%"),
+    widget.CPU(**base(bg='color3'),
+        mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop')},
+        format="{load_percent}%"),
     #RAM usage widget
     icon(bg="color3", text='溜'),  # Icon: nf-mdi-memory
-    widget.Memory(**base(bg='color3')),
+    widget.Memory(**base(bg='color3'),
+        mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop')}),
 
     #Layout
     powerline('color2', 'color3'),
@@ -94,9 +94,21 @@ primary_widgets = [
     #Clock widget
     icon(bg="color1", text=' '), # Icon: nf-mdi-calendar_clock
     widget.Clock(**base(bg='color1'), format='%d/%m/%Y - %H:%M:%S '),
+
+    #Systray
+    powerline('dark', 'color1'),
+    widget.Systray(**base(bg='dark')),
 ]
 
 secondary_widgets = [
+    *workspaces(),
+    separator(),
+
+    powerline('color2', 'dark'),
+    #Layout widget
+    widget.CurrentLayoutIcon(**base(bg='color2'), scale=0.55),
+    widget.CurrentLayout(**base(bg='color2')),
+
 ]
 
 widget_defaults = {

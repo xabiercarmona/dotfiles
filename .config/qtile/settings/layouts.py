@@ -19,7 +19,18 @@ layouts = [
     #All windows almost equal distribution
     layout.Bsp(**layout_conf),
     #All windows max with task
-    layout.TreeTab(**layout_conf),
+    layout.TreeTab(**layout_conf,
+
+        font='UbuntuMono Nerd Font',
+        fontsize=15,
+        section_fontsize=16,
+        section_left = 6,
+        previous_on_rm='True',
+        sections=['Open tabs'],
+        active_bg=colors['focus'],
+        active_fg=colors['light'],
+        inactive_bg=colors['dark'],
+        inactive_fg=colors['inactive']),
 ]
 
 floating_layout = layout.Floating(

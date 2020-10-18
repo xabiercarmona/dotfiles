@@ -1,10 +1,7 @@
 #Main qtile config
 
-from typing import List  # noqa: F401
 
-from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Screen
-from libqtile.lazy import lazy
+from libqtile import hook
 
 from settings.keys import mod, keys
 from settings.groups import groups
@@ -14,18 +11,23 @@ from settings.screens import screens
 from settings.mouse import mouse
 from settings.path import qtile_path
 
+from os import path
+import subprocess
 
 
-# Drag floating layouts.
+
+#Add hook to launch script at start
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.call([path.join(qtile_path, 'autostart.sh')])
 
 
+main = None
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
-main = None  # WARNING: this is deprecated and will be removed soon
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = False
-cursor_warp = False
-
+cursor_warp = True
 auto_fullscreen = True
-focus_on_window_activation = "smart"
-wmname = "LG3D"
+focus_on_window_activation = 'urgent'
+wmname = 'LG3D'
