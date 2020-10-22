@@ -74,7 +74,7 @@ primary_widgets = [
     #Cput/RAM usage
     powerline('color3', 'color4'),
     #Cpu usage widget
-    icon(bg="color3", text=' '),  # Icon: nf-mdi-speedometer
+    icon(bg="color3", text=''),  # Icon: nf-mdi-speedometer
     widget.CPU(**base(bg='color3'),
         mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop -s PERCENT_CPU')},
         format="{load_percent}%"),

@@ -38,6 +38,12 @@ keys = [
       Key([alt, control], "Left", lazy.layout.shuffle_left(), desc="Switch with the left window"),
       Key([alt, control], "Right", lazy.layout.shuffle_right(), desc="Switch with the right window"),
 
+      #Resize window
+      Key([mod, control], "Up", lazy.layout.grow(), desc="Make selected window bigger"),
+      Key([mod, control], "Down", lazy.layout.shrink(), desc="Make selected window smaller"),
+      Key([mod, control], "Left", lazy.layout.normalize(), desc="Normalize the selected window"),
+      Key([mod, control], "Right", lazy.layout.maximize(), desc="Maximize de selected window"),
+
     #Menu
       #Fire rofi to start app
       Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Show app launcher"),
