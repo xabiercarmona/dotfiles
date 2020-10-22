@@ -2,15 +2,25 @@
 # ~/.bashrc
 #
 
+#Export paths and variables
+export TERM="alacritty"
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 #Optimized aliases
 
 alias grep='grep --color=auto'
-alias ls='ls --color=auto'
+alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -la'
 alias vim='nvim'
+
+#Change title of the terminals
+case ${TERM} in
+	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
+		PROMPT_COMMAND='echo -ne "\033]0;${TERM^} ${PWD/#$HOME/\~}\007"'
+		;;
+esac
 
 #Extract compressed files
 # usage: ex <file>

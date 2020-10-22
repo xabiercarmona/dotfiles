@@ -76,12 +76,12 @@ primary_widgets = [
     #Cpu usage widget
     icon(bg="color3", text=' '),  # Icon: nf-mdi-speedometer
     widget.CPU(**base(bg='color3'),
-        mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop')},
+        mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop -s PERCENT_CPU')},
         format="{load_percent}%"),
     #RAM usage widget
     icon(bg="color3", text='溜'),  # Icon: nf-mdi-memory
     widget.Memory(**base(bg='color3'),
-        mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop')}),
+        mouse_callbacks={'Button1': lambda qtile: qtile.cmd_spawn(terminal + ' -e htop -s PERCENT_MEM')}),
 
     #Layout
     powerline('color2', 'color3'),
