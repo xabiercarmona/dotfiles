@@ -18,6 +18,7 @@ terminal = "alacritty"
 keys = [
     #Qtile
       Key([mod, control], "r", lazy.restart(), desc="Restart qtile"),
+      Key([alt, control], "l", lazy.spawn("dm-tool lock"), desc="lock screen"),
     #Kill window
       Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     #Layouts
