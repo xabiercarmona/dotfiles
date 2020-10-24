@@ -1,1 +1,4 @@
 window.dynamic_title: true
+font:
+        normal:
+                family: DejaVu Sans Mono for Powerline
