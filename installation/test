@@ -1,0 +1,7 @@
+sudo cp /etc/lightdm/lightdm.conf{,.old}
+sudo cp /etc/lightdm/lightdm-webkit2-greeter.conf{,.old}
+
+sudo cp lightdm/lightdm.conf /etc/lightdm/lightdm.conf
+sudo cp lightdm/greeter.conf /etc/lightdm/lightdm-webkit2-greeter.conf
+
+sudo systemctl enable lightdm.service -f
